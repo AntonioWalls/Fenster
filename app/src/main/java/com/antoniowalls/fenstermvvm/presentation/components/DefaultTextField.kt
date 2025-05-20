@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import com.antoniowalls.fenstermvvm.ui.theme.Blue500
 
 @Composable
@@ -21,6 +23,7 @@ fun DefaultTextField(
     label: String,
     icon: ImageVector,
     keyboardType: KeyboardType = KeyboardType.Text,
+    hideText: Boolean = false
 ){
     OutlinedTextField(
         modifier = modifier,
@@ -40,6 +43,7 @@ fun DefaultTextField(
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType
-        )
+        ),
+        visualTransformation = if(hideText) PasswordVisualTransformation() else VisualTransformation.None
     )
 }

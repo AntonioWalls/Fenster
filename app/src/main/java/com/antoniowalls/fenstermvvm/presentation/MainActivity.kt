@@ -47,7 +47,9 @@ import com.antoniowalls.fenstermvvm.presentation.screens.auth.login.LoginScreen
 import com.antoniowalls.fenstermvvm.ui.theme.Blue500
 import com.antoniowalls.fenstermvvm.ui.theme.Blue700
 import com.antoniowalls.fenstermvvm.ui.theme.FensterMVVMTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -39,13 +39,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.antoniowalls.fenstermvvm.R
+import com.antoniowalls.fenstermvvm.presentation.navigation.graph.RootNavGraph
 import com.antoniowalls.fenstermvvm.presentation.screens.auth.login.LoginScreen
 import com.antoniowalls.fenstermvvm.ui.theme.Blue500
 import com.antoniowalls.fenstermvvm.ui.theme.Blue700
 import com.antoniowalls.fenstermvvm.ui.theme.FensterMVVMTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,7 +60,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen()
+                    navController = rememberNavController()
+                    RootNavGraph(navController = navController)
                 }
             }
         }

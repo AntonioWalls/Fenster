@@ -1,6 +1,7 @@
 package com.antoniowalls.fenstermvvm.presentation.screens.auth.login.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,14 +32,19 @@ import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.antoniowalls.fenstermvvm.R
+import com.antoniowalls.fenstermvvm.presentation.components.DefaultButton
+import com.antoniowalls.fenstermvvm.presentation.components.DefaultTextField
+import com.antoniowalls.fenstermvvm.presentation.navigation.screen.AuthScreen
 import com.antoniowalls.fenstermvvm.ui.theme.Blue500
 import com.antoniowalls.fenstermvvm.ui.theme.Blue700
 
 @Composable
-fun LoginContent(paddingValues: PaddingValues){
+fun LoginContent(navController: NavHostController, paddingValues: PaddingValues){
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -99,46 +105,34 @@ fun LoginContent(paddingValues: PaddingValues){
                         fontSize = 20.sp,
                         color = Color.Black
                     )
-                    OutlinedTextField(
+                    DefaultTextField(
                         modifier = Modifier.fillMaxWidth(),
                         value = "",
                         onValueChange = {},
-                        label = {
-                            Text(text="Correo Electrónico")
-                        },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Email,
-                                contentDescription = "",
-                                tint = Blue500
-                            )
-                        }
+                        label = "Correo Electrónico",
+                        icon = Icons.Default.Email,
+                        keyboardType = KeyboardType.Email
                     )
-                    OutlinedTextField(
+                    Spacer(
+                        modifier = Modifier.height(16.dp)
+                    )
+                    DefaultTextField(
                         modifier = Modifier.fillMaxWidth(),
                         value = "",
                         onValueChange = {},
-                        label = {
-                            Text(text="Contraseña")
-                        },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Lock,
-                                contentDescription = "",
-                                tint = Blue500
-                            )
-                        }
+                        label = "Contraseña",
+                        icon = Icons.Default.Lock,
+                        keyboardType = KeyboardType.Password
                     )
-                    Button(
+                    Spacer(modifier = Modifier.height(10.dp))
+                    DefaultButton(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top=20.dp),
-                        onClick = {},
-
-                        ) {
-                        Text("Inciar Sesión")
-
-                    }
+                            .height(40.dp),
+                        onClick = { /*TODO*/ },
+                        text = "LOGIN",
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -148,6 +142,10 @@ fun LoginContent(paddingValues: PaddingValues){
                         Text(text="No tienes cuenta?")
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
+                            modifier = Modifier
+                                .clickable {
+                                    navController.navigate(route = AuthScreen.Register.route)
+                                },
                             text = "Registrate",
                             color = Blue700
                         )
